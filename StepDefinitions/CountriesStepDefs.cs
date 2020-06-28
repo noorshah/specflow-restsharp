@@ -20,13 +20,12 @@ namespace specflow_restsharp.StepDefinitions
         [Given(@"I get information for all countries of the world")]
         public void GivenIGetInformationForAllCountriesOfTheWorld()
         {
-            statusCode = new CountriesHelper().restCountries();
+            statusCode = new CountriesHelper().restCountriesStatusCode();
         }
 
         [Then(@"the status code should be (.*)")]
         public void ThenTheStatusCodeShouldBe(int p0)
         {
-            Console.WriteLine(statusCode);
             Assert.AreEqual(statusCode, p0);
         }
 

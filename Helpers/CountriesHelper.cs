@@ -13,13 +13,16 @@ namespace specflow_restsharp.Helpers
         RestRequest restRequest;
        IRestResponse restResponse;
 
-        public int restCountries()
-
-
+        public IRestResponse restCountries()
         {
             restRequest = new RestRequest("/all", Method.GET);
-
             restResponse = restClient.Execute(restRequest);
+            return restResponse;
+        }
+
+        public int restCountriesStatusCode()
+        {
+            restResponse = restCountries();
             return (int)restResponse.StatusCode;
         }
         
