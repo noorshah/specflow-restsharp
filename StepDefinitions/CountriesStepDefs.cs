@@ -24,9 +24,9 @@ namespace specflow_restsharp.StepDefinitions
         }
 
         [Then(@"the status code should be (.*)")]
-        public void ThenTheStatusCodeShouldBe(int p0)
+        public void ThenTheStatusCodeShouldBe(int code)
         {
-            Assert.AreEqual(statusCode, p0);
+            Assert.AreEqual(statusCode, code);
         }
 
     }
