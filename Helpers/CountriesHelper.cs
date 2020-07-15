@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using RestSharp;
-using RestSharp.Serialization;
+using RestSharp.Serializers.NewtonsoftJson;
+using Utf8Json;
+using RestSharp.Serialization.Json;
 
 namespace specflow_restsharp.Helpers
 {
@@ -11,20 +13,27 @@ namespace specflow_restsharp.Helpers
 
         RestClient restClient = new RestClient("https://restcountries.eu/rest/v2");
         RestRequest restRequest;
-       IRestResponse restResponse;
+        IRestResponse restResponse;
+        
+
 
         public IRestResponse restCountries()
         {
             restRequest = new RestRequest("/all", Method.GET);
-            restResponse = restClient.Execute(restRequest);
+            restResponse = restClient.Execute<Dictionary<string, List<CountryInfo>>>(restRequest);
             return restResponse;
         }
 
-        public int restCountriesStatusCode()
-        {
-            restResponse = restCountries();
-            return (int)restResponse.StatusCode;
+        public int restCountriesStatusCode(IRestResponse response)
+        {  
+            return (int)response.StatusCode;
         }
         
+        public string UKexistsInCountriesList(IRestResponse response)
+        {
+            
+            Console.WriteLine(response.Content); 
+            return response.Content;
+        }
     }
 }
